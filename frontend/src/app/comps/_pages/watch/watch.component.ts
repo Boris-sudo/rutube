@@ -28,14 +28,8 @@ export class WatchComponent implements OnInit {
   }
 
   parseViewsCount(): string {
-    let res = '';
-    let number = String(this.video.views);
-    for(let i=number.length-1; i>=0; --i) {
-      if ((number.length - i + 1) % 3 === 0)
-        res = res + ' ';
-      res = res + number[i];
-    }
-    return res;
+    let str = this.video.views.toString();
+    return str.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
   }
 
   likeVideo() {

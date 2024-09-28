@@ -16,7 +16,7 @@ export class MockService {
       likes: 1203,
       dislikes: 40,
       comments: 130,
-      views: 6540402
+      views: 12345
     },
     {
       video_id: 1,
@@ -27,7 +27,7 @@ export class MockService {
       likes: 1203,
       dislikes: 40,
       comments: 130,
-      views: 6540402
+      views: 1234
     },
     {
       video_id: 2,
@@ -38,7 +38,7 @@ export class MockService {
       likes: 1203,
       dislikes: 40,
       comments: 130,
-      views: 6540402
+      views: 123
     },
   ]
 
