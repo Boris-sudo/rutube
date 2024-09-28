@@ -1,0 +1,542 @@
+basePath: /api/
+definitions:
+  models.User:
+    properties:
+      city:
+        type: string
+      email:
+        type: string
+      login:
+        type: string
+      name:
+        type: string
+      region:
+        type: string
+      surname:
+        type: string
+      uuid:
+        type: string
+    type: object
+  models.UserVideoHistory:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: integer
+      userId:
+        type: string
+      videoId:
+        type: string
+    type: object
+  models.UserVideoPreference:
+    properties:
+      createdAt:
+        type: string
+      isDisliked:
+        type: boolean
+      isLiked:
+        type: boolean
+      updatedAt:
+        type: string
+      userId:
+        type: string
+      videoId:
+        type: string
+    type: object
+host: 127.0.0.1:8080
+info:
+  contact: {}
+  description: Backend for Recsys program.
+  title: Cold Start API
+  version: "1.0"
+paths:
+  /accounts/login:
+    post:
+      consumes:
+      - application/json
+      description: Logs in the user by verifying their email and password. Returns
+        a JWT token and user data upon successful login.
+      parameters:
+      - description: User's email
+        example: '"example@gmail.com"'
+        in: body
+        name: email
+        required: true
+        schema:
+          type: string
+      - description: User's password
+        example: '"Pa$$w0rd"'
+        in: body
+        name: password
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Logged-in user data
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Invalid request data
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: User not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: User login
+      tags:
+      - Accounts
+  /accounts/logout:
+    post:
+      consumes:
+      - application/json
+      description: Logs out the user by invalidating the JWT token stored in the cookie.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Logout successful message
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: User logout
+      tags:
+      - Accounts
+  /accounts/register:
+    post:
+      consumes:
+      - application/json
+      description: Registers a new user. If the login is empty, returns a temporary
+        UUID. If successful, returns the created user's information, including a UUID,
+        login, email, and other details.
+      parameters:
+      - description: User's login
+        example: '"Example"'
+        in: body
+        name: login
+        required: true
+        schema:
+          type: string
+      - description: User's email
+        example: '"example@gmail.com"'
+        in: body
+        name: email
+        required: true
+        schema:
+          type: string
+      - description: User's password
+        example: '"Pa$$w0rd"'
+        in: body
+        name: password
+        required: true
+        schema:
+          type: string
+      - description: User's name
+        example: '"Fedor"'
+        in: body
+        name: name
+        schema:
+          type: string
+      - description: User's surname
+        example: '"Triphosphate"'
+        in: body
+        name: surname
+        schema:
+          type: string
+      - description: User's region
+        example: '"CFD"'
+        in: body
+        name: region
+        schema:
+          type: string
+      - description: User's city
+        example: '"Moscow"'
+        in: body
+        name: city
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Registered user information
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Invalid request data or registration failed
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: User registration
+      tags:
+      - Accounts
+  /accounts/user/:
+    get:
+      consumes:
+      - application/json
+      description: Authenticate the user by checking the JWT token in the request
+        cookies. If authenticated, return user data.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Authenticated user data
+          schema:
+            $ref: '#/definitions/models.User'
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Authenticate user
+      tags:
+      - Accounts
+  /recsys/history/:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves the video history of a user based on their user ID.
+      parameters:
+      - description: User's UUID
+        example: '"8195aaf7-0108-4d8c-be8d-fc4255686feb"'
+        in: body
+        name: user_id
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User's video history
+          schema:
+            items:
+              $ref: '#/definitions/models.UserVideoHistory'
+            type: array
+        "400":
+          description: Invalid request payload
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Failed to retrieve video history
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get user's video history
+      tags:
+      - Video History
+  /recsys/history/clear:
+    post:
+      consumes:
+      - application/json
+      description: It does EXACTLY what it says.
+      parameters:
+      - description: User's UUID
+        example: '"6686fc28-e98e-4100-a00e-e180f15e5c75"'
+        in: body
+        name: user_id
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Video history cleared successfully
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Invalid request payload
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Failed to clear video history
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Clears user's video history
+      tags:
+      - Video History
+  /recsys/history/save:
+    post:
+      consumes:
+      - application/json
+      description: Adds a video entry to a user's history based on their user ID and
+        video ID.
+      parameters:
+      - description: User's UUID
+        example: '"6686fc28-e98e-4100-a00e-e180f15e5c75"'
+        in: body
+        name: user_id
+        required: true
+        schema:
+          type: string
+      - description: Video's UUID
+        example: '"8195aaf7-0108-4d8c-be8d-fc4255686feb"'
+        in: body
+        name: video_id
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Video history saved successfully
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Invalid request payload
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Failed to save video history
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Save video to user's history
+      tags:
+      - Video History
+  /recsys/preferences/:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves all video preferences for a user based on their user
+        ID.
+      parameters:
+      - description: User's unique identifier
+        example: '"8195aaf7-0108-4d8c-be8d-fc4255686feb"'
+        in: body
+        name: user_id
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of user's video preferences
+          schema:
+            items:
+              $ref: '#/definitions/models.UserVideoPreference'
+            type: array
+        "400":
+          description: Invalid request payload
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Failed to retrieve user preferences
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get User Preferences
+      tags:
+      - Preferences
+  /recsys/preferences/save:
+    post:
+      consumes:
+      - application/json
+      description: Saves the user's preference for a video based on user ID and video
+        ID.
+      parameters:
+      - description: User's unique identifier
+        example: '"8195aaf7-0108-4d8c-be8d-fc4255686feb"'
+        in: body
+        name: user_id
+        required: true
+        schema:
+          type: string
+      - description: Video's unique identifier
+        example: '"6686fc28-e98e-4100-a00e-e180f15e5c75"'
+        in: body
+        name: video_id
+        required: true
+        schema:
+          type: string
+      - description: Indicates if the video is liked
+        example: '"true"'
+        in: body
+        name: is_liked
+        schema:
+          type: string
+      - description: Indicates if the video is disliked
+        example: '"false"'
+        in: body
+        name: is_disliked
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Message indicating the save was successful
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Invalid request payload
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Failed to save video preference
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Save Video Preference
+      tags:
+      - Preferences
+  /recsys/preferences/update:
+    post:
+      consumes:
+      - application/json
+      description: Updates the user's preference for a video based on user ID and
+        video ID.
+      parameters:
+      - description: User's unique identifier
+        example: '"8195aaf7-0108-4d8c-be8d-fc4255686feb"'
+        in: body
+        name: user_id
+        required: true
+        schema:
+          type: string
+      - description: Video's unique identifier
+        example: '"6686fc28-e98e-4100-a00e-e180f15e5c75"'
+        in: body
+        name: video_id
+        required: true
+        schema:
+          type: string
+      - description: Indicates if the video is liked
+        example: '"true"'
+        in: body
+        name: is_liked
+        schema:
+          type: string
+      - description: Indicates if the video is disliked
+        example: '"false"'
+        in: body
+        name: is_disliked
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Message indicating the update was successful
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Invalid request payload
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Failed to update video preference
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update Video Preference
+      tags:
+      - Preferences
+  /recsys/preferences/video/:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves the user's preference for a video based on user ID and
+        video ID.
+      parameters:
+      - description: User's unique identifier
+        example: '"8195aaf7-0108-4d8c-be8d-fc4255686feb"'
+        in: body
+        name: user_id
+        required: true
+        schema:
+          type: string
+      - description: Video's unique identifier
+        example: '"6686fc28-e98e-4100-a00e-e180f15e5c75"'
+        in: body
+        name: video_id
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: User's preference for the specified video
+          schema:
+            $ref: '#/definitions/models.UserVideoPreference'
+        "400":
+          description: Invalid request payload
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Failed to retrieve video preference
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get User Video Preference
+      tags:
+      - Preferences
+swagger: "2.0"
