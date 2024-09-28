@@ -42,10 +42,26 @@ export class ApiService {
       this.mock.get_videos(count)
     ));
 
+    function shuffle(array: number[]) {
+      let currentIndex = array.length;
+      while (currentIndex != 0) {
+        let randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex], array[currentIndex]];
+      }
+    }
+    let arr = [];
+    for (let i = 1; i <= 20; i++) arr.push(i);
+    shuffle(arr);
+
+    let index = 0;
     for (const video of resp) {
-      let res_video: VideoModel = video;
-      res_video.main_src = `main/${this.randomIntFromInterval(1,1)}.webp`;
-      res_video.shorts_src = `shorts/${this.randomIntFromInterval(1,20)}.avif`;
+      let res_video: any = {};
+      for (const key in video) res_video[key] = video[key];
+      res_video.main_src = `main/${arr[index]}.webp`;
+      res_video.shorts_src = `shorts/${arr[index]}.avif`;
+      index++;
       result.push(res_video);
     }
 

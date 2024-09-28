@@ -169,6 +169,7 @@ export class ShortsComponent implements OnInit, AfterViewInit {
   }
 
   scrollUp() {
+    console.log('======================')
     const prev = document.getElementsByClassName('prev').item(0);
     const current = document.getElementsByClassName('current').item(0)!;
     const next = document.getElementsByClassName('next').item(0)!;
@@ -206,12 +207,13 @@ export class ShortsComponent implements OnInit, AfterViewInit {
     this.renderer.setStyle(componentRef.location.nativeElement, 'height', '100%');
     this.renderer.appendChild(div, componentRef.location.nativeElement);
 
-    componentRef.instance.video = this.videos[this.current_index - 1];
+    componentRef.instance.video = this.videos[this.current_index - 2];
 
     this.current_index--;
   }
 
   scrollDown() {
+    console.log('======================')
     const prev = document.getElementsByClassName('prev').item(0);
     const current = document.getElementsByClassName('current').item(0)!;
     const next = document.getElementsByClassName('next').item(0)!;

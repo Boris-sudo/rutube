@@ -10,4 +10,11 @@ import { VideoModel } from "../../../models/video.model";
 })
 export class MainVideoCoverComponent {
   @Input() video!: VideoModel;
+
+  constructor() {
+  }
+
+  getSrc() {
+    return this.video.main_src;
+  }
 }

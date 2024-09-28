@@ -19,7 +19,13 @@ export class VideoComponent {
 
   constructor(
     private api: ApiService,
-  ) {}
+  ) {
+  }
+
+  getSrc() {
+    console.log(this.video.shorts_src);
+    return this.video.shorts_src;
+  }
 
   like() {
     if (!this.video.is_liked) {
