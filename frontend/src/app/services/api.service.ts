@@ -9,7 +9,7 @@ import { UserModel } from "../models/user.model";
   providedIn: 'root'
 })
 export class ApiService {
-  private readonly base_url = 'http://localhost:3000/api';
+  private readonly base_url = 'http://localhost:8080/api';
   private readonly user_id_key: string = 'session';
 
   private request(url: string): string {
