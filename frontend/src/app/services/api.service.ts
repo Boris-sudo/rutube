@@ -94,11 +94,14 @@ export class ApiService {
         password: password,
       }),
     ));
+
+    await this.save_to_history(resp.uuid);
+
     return resp;
   }
 
   async register(login: string = '', email: string | undefined = '', password: string | undefined = '', name: string | undefined = '', surname: string | undefined = '', region: string | undefined = '', city: string | undefined = ''): Promise<void> {
-    let res;
+    let res: any;
     if (login === '') {
       // res = await firstValueFrom(this.mock.register());
       res = await firstValueFrom(this.http.post(this.request('accounts/register'), { login: '' }));
@@ -107,8 +110,6 @@ export class ApiService {
       res = await firstValueFrom(this.http.post(this.request('accounts/register'), { login: login, email: email, password: password, name: name, surname: surname, region: region, city: city}));
     }
 
-    // @ts-ignore
-    let res_json = JSON.parse(res);
-    this.save_user_id(res_json.uuid);
+    this.save_user_id(res.uuid);
   }
 }
