@@ -1,6 +1,6 @@
 <div class="container">
   @for (video of videos; track videos) {
-    <div (click)="go(video)" class="video">
+    <div [class.highlight]="isMoreThanOne(video.video_id)" (click)="go(video)" class="video">
       <VideoCover [video]="video"/>
     </div>
   }

@@ -34,4 +34,12 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.api.get_videos(10).then(resp => this.addVideos(resp));
   }
+
+  isMoreThanOne(video_id: number) {
+    const counts = JSON.parse(localStorage.getItem('videos') !== null? localStorage.getItem('videos')! : '{}');
+    if (counts[video_id] === undefined || counts[video_id] === null) counts[video_id] = 0;
+    counts[video_id]++;
+    localStorage.setItem('videos', JSON.stringify(counts));
+    return counts[video_id] > 1;
+  }
 }
