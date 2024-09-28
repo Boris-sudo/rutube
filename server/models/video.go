@@ -3,6 +3,7 @@ package models
 type Video struct {
 	Title       string `json:"title"`
 	Description string `json:"description"`
+	Category    string `json:"category"`
 	Id          string `json:"video_id"`
 	Views       int    `json:"views"`
 	Comments    int    `json:"comments"`

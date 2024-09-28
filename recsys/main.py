@@ -24,6 +24,7 @@ def get_random_videos():
             'video_id': row['video_id'],
             'description': row['description'],
             'title': row['title'],
+            'category': row['category_id'],
             'views': row['v_year_views'],
             'comments': row['v_total_comments'],
             'likes': row['v_likes'],
