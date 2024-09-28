@@ -8,37 +8,37 @@ import { VideoModel } from "../models/video.model";
 export class MockService {
   private readonly videos: VideoModel[] = [
     {
-      id: 0,
-      name: 'How programmers flex on each other',
+      video_id: 0,
+      title: 'How programmers flex on each other',
       description: 'Brainfuck is a minimal esoteric programming language. It provides a 30K 8-bit array that can be modified with 8 different characters.',
       liked: false,
       disliked: false,
-      likes_count: 1203,
-      dislikes_count: 40,
-      comments_count: 130,
-      views_count: 6540402
+      likes: 1203,
+      dislikes: 40,
+      comments: 130,
+      views: 6540402
     },
     {
-      id: 1,
-      name: '10 Math Concepts for Programmers',
+      video_id: 1,
+      title: '10 Math Concepts for Programmers',
       description: 'Learn 10 essential math concepts for software engineering and technical interviews. Understand how programmers use mathematics in fields like AI, game dev, crypto, machine learning, and more.',
       liked: false,
       disliked: true,
-      likes_count: 1203,
-      dislikes_count: 40,
-      comments_count: 130,
-      views_count: 6540402
+      likes: 1203,
+      dislikes: 40,
+      comments: 130,
+      views: 6540402
     },
     {
-      id: 2,
-      name: 'Just the Two of Us - Cover',
+      video_id: 2,
+      title: 'Just the Two of Us - Cover',
       description: 'Hey guys it\'s been a while! Here is my cover of Just the Two of Us by Grover Washington Jr. Thank you for all the support, wow almost 500 subs :) some people were asking, my Instagram is @lucellis',
       liked: false,
       disliked: false,
-      likes_count: 1203,
-      dislikes_count: 40,
-      comments_count: 130,
-      views_count: 6540402
+      likes: 1203,
+      dislikes: 40,
+      comments: 130,
+      views: 6540402
     },
   ]
 
@@ -52,18 +52,18 @@ export class MockService {
 
   get_video_by_id(id: number) {
     for (const video of this.videos) {
-      if (video.id === id)
+      if (video.video_id === id)
         return of(JSON.stringify({result: video}));
     }
     return of('{}');
   }
 
   get_videos(count: number = 10): Observable<any> {
-    let result: { result: VideoModel[] } = { result: [] };
+    let result: VideoModel[] = [];
 
     for (let i = 0; i < count; i++) {
       const id = this.randomIntFromInterval(0, this.videos.length - 1);
-      result.result.push(this.videos[id]);
+      result.push(this.videos[id]);
     }
 
     return of(result);

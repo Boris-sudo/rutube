@@ -31,7 +31,7 @@ export class WatchComponent implements OnInit {
 
   parseViewsCount(): string {
     let res = '';
-    let number = String(this.video.views_count);
+    let number = String(this.video.views);
     for(let i=number.length-1; i>=0; --i) {
       if ((number.length - i + 1) % 3 === 0)
         res = res + ' ';
@@ -50,30 +50,30 @@ export class WatchComponent implements OnInit {
         this.like_icon.nativeElement.classList.remove('animated_like')
       }, 600);
 
-      if (this.video.disliked) this.video.dislikes_count--;
+      if (this.video.disliked) this.video.dislikes--;
       this.video.disliked = false;
       this.video.liked = true;
-      this.video.likes_count++;
-      this.api.react(this.video.id, this.video.liked, this.video.disliked).then().catch();
+      this.video.likes++;
+      this.api.react(this.video.video_id, this.video.liked, this.video.disliked).then().catch();
     } else {
       if (this.video.liked)
-        this.video.likes_count--;
+        this.video.likes--;
       this.video.liked = false;
-      this.api.react(this.video.id, this.video.liked, this.video.disliked).then().catch();
+      this.api.react(this.video.video_id, this.video.liked, this.video.disliked).then().catch();
     }
   }
 
   dislikeVideo() {
     if (!this.video.disliked) {
-      if (this.video.liked) this.video.likes_count--;
+      if (this.video.liked) this.video.likes--;
       this.video.disliked = true;
       this.video.liked = false;
-      this.video.dislikes_count++;
-      this.api.react(this.video.id, this.video.liked, this.video.disliked).then().catch();
+      this.video.dislikes++;
+      this.api.react(this.video.video_id, this.video.liked, this.video.disliked).then().catch();
     } else {
-      if (this.video.disliked) this.video.dislikes_count--;
+      if (this.video.disliked) this.video.dislikes--;
       this.video.disliked = false;
-      this.api.react(this.video.id, this.video.liked, this.video.disliked).then().catch();
+      this.api.react(this.video.video_id, this.video.liked, this.video.disliked).then().catch();
     }
   }
 }

@@ -9,7 +9,7 @@ import { UserModel } from "../models/user.model";
   providedIn: 'root'
 })
 export class ApiService {
-  private readonly base_url = 'http://localhost:3000';
+  private readonly base_url = 'http://localhost:3000/api';
   private readonly user_id_key: string = 'session';
 
   private request(url: string): string {
@@ -44,13 +44,14 @@ export class ApiService {
 
   async get_videos(count: number = 10): Promise<VideoModel[]> {
     let result: VideoModel[] = [];
+    const user_id = this.get_user_id();
 
     const resp: any = await firstValueFrom(onErrorResumeNext(
-      this.http.get(this.request('')),
+      this.http.post(this.request('recsys/videos'), {user_id: user_id}),
       this.mock.get_videos(count)
     ));
 
-    for (const video of resp.result) {
+    for (const video of resp) {
       result.push(video);
     }
 
@@ -99,11 +100,11 @@ export class ApiService {
   async register(login: string = '', email: string | undefined = '', password: string | undefined = '', name: string | undefined = '', surname: string | undefined = '', region: string | undefined = '', city: string | undefined = ''): Promise<void> {
     let res;
     if (login === '') {
-      res = await firstValueFrom(this.mock.register());
-      // res = await firstValueFrom(this.http.post(this.request('accounts/register'), { login: '' }));
+      // res = await firstValueFrom(this.mock.register());
+      res = await firstValueFrom(this.http.post(this.request('accounts/register'), { login: '' }));
     } else {
-      res = await firstValueFrom(this.mock.register());
-      // res = await firstValueFrom(this.http.post(this.request('accounts/register'), { login: login, email: email, password: password, name: name, surname: surname, region: region, city: city}));
+      // res = await firstValueFrom(this.mock.register());
+      res = await firstValueFrom(this.http.post(this.request('accounts/register'), { login: login, email: email, password: password, name: name, surname: surname, region: region, city: city}));
     }
 
     // @ts-ignore

@@ -1,6 +1,6 @@
 <div class="container">
   @for (video of videos; track videos) {
-    <a [routerLink]="['/watch', video.id]">
+    <a [routerLink]="['/watch', video.video_id]">
       <div class="video">
         <VideoCover [video]="video"/>
       </div>
