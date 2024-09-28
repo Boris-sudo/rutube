@@ -53,12 +53,16 @@ func setupRoutes(r *chi.Mux) {
 	r.Post("/api/recsys/history/clear", recSys.ClearVideoHistoryHandler)
 	r.Post("/api/recsys/history/save", recSys.SaveVideoHistoryHandler)
 	r.Get("/api/recsys/history", recSys.GetVideoHistoryHandler)
+	r.Get("/api/recsys/user", recSys.GetUserByIDHandler)
 
 	// <-- Preferences -->
 	r.Post("/api/recsys/preferences/save", recSys.SaveVideoPreferenceHandler)
 	r.Post("/api/recsys/preferences/update", recSys.UpdateVideoPreferenceHandler)
 	r.Get("/api/recsys/preferences/video", recSys.GetVideoPreferenceHandler)
 	r.Get("/api/recsys/preferences", recSys.GetUserPreferencesHandler)
+
+	// <-- Recsys -->
+	r.Post("/api/recsys/videos", recSys.GetVideosByUserID)
 
 	loggerGlobal.Info("Routes initialized")
 }
