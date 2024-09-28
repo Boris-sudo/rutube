@@ -23,13 +23,8 @@ export class WatchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      let video_id = Number(params.get('video_id')!);
-      this.api.get_video_by_id(video_id).then(resp => {
-        this.video = resp;
-        this.api.save_to_history(this.video.video_id).then();
-      });
-    });
+    this.video = JSON.parse(localStorage.getItem('video')!);
+    this.api.save_to_history(this.video.video_id).then();
   }
 
   parseViewsCount(): string {

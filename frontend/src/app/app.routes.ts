@@ -9,6 +9,6 @@ export const routes: Routes = [
   { path: 'main', component: MainComponent },
   { path: 'saved', component: SavedComponent },
   { path: 'shorts', component: ShortsComponent },
-  { path: 'watch/:video_id', component: WatchComponent },
+  { path: 'watch', component: WatchComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'main' },
 ];

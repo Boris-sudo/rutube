@@ -29,19 +29,6 @@ export class ApiService {
     localStorage.setItem(this.user_id_key, user_id);
   }
 
-  async get_video_by_id(id: number): Promise<VideoModel> {
-    let result!: VideoModel;
-
-    const resp: any = await firstValueFrom(onErrorResumeNext(
-      this.http.get(this.request('')),
-      this.mock.get_video_by_id(id)
-    ));
-
-    result = JSON.parse(resp).result;
-
-    return result;
-  }
-
   async get_videos(count: number = 10): Promise<VideoModel[]> {
     let result: VideoModel[] = [];
     const user_id = this.get_user_id();

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VideoModel } from "../../../models/video.model";
 import { ApiService } from "../../../services/api.service";
 import { MainVideoCoverComponent } from "../../_models/main-video-cover/main-video-cover.component";
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-main',
@@ -19,10 +19,16 @@ export class MainComponent implements OnInit {
 
   constructor(
     private api: ApiService,
+    private router: Router
   ) {}
 
   addVideos(arr: VideoModel[]) {
     this.videos = arr;
+  }
+
+  go(video: VideoModel) {
+    localStorage.setItem('video', JSON.stringify(video));
+    this.router.navigate(['watch']).then();
   }
 
   ngOnInit() {
