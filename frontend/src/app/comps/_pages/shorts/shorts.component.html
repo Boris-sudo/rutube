@@ -1,0 +1,11 @@
+<div class="container" #container>
+  @if(videos.length > 0) {
+    <div class="video current">
+      <VideoComp [video]="videos[0]"/>
+    </div>
+
+    <div class="video next">
+      <VideoComp [video]="videos[1]"/>
+    </div>
+  }
+</div>

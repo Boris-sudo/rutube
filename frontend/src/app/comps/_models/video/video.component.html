@@ -1,0 +1,48 @@
+<div class="container">
+  <img src="background.avif">
+
+  <div class="info">
+    <p class="title">{{ video.name }}</p>
+    <p *ngIf="video.description">{{ video.description }}</p>
+  </div>
+
+  <div class="react">
+    <div class="flex-col align-center just-center" style="font-weight: 600;">
+      <div [class.chosen]="video.liked" (click)="like()" class="item">
+        <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M7.5 4C4.46244 4 2 6.46245 2 9.5C2 15 8.5 20 12 21.1631C15.5 20 22 15 22 9.5C22 6.46245 19.5375 4 16.5 4C14.6399 4 12.9954 4.92345 12 6.3369C11.0046 4.92345 9.36015 4 7.5 4Z"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <p>{{ video.likes_count }}</p>
+    </div>
+
+    <div class="flex-col align-center just-center" style="font-weight: 600;">
+      <div [class.chosen]="video.disliked" (click)="dislike()" class="item">
+        <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M7.5 4C4.46244 4 2 6.46245 2 9.5C2 15 8.5 20 12 21.1631C15.5 20 22 15 22 9.5C22 6.46245 19.5375 4 16.5 4C14.6399 4 12.9954 4.92345 12 6.3369C11.0046 4.92345 9.36015 4 7.5 4Z"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12.5 4.5L10 10L14.5 9L11 15" stroke="#141414" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <p>{{ video.dislikes_count }}</p>
+    </div>
+
+    <div class="flex-col align-center just-center" style="font-weight: 600;">
+      <div class="item">
+        <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M22 12C22 17.5229 17.5229 22 12 22C9.01327 22 2 22 2 22C2 22 2 14.5361 2 12C2 6.47715 6.47717 2 12 2C17.5229 2 22 6.47715 22 12Z"
+            fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M7 9H16" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M7 13H16" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M7 17H12" stroke="#141414" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <p>{{ video.comments_count }}</p>
+    </div>
+  </div>
+</div>

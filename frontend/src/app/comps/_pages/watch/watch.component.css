@@ -1,0 +1,107 @@
+.container {
+  img {
+    width:         100%;
+    border-radius: 16px;
+  }
+}
+
+.info {
+  display:        flex;
+  flex-direction: column;
+  gap:            5px;
+
+  .title {
+    font-size:   20px;
+    font-weight: 600;
+  }
+
+  .desc {
+    padding:        12px;
+    border-radius:  16px;
+    font-size:      15px;
+    background:     var(--background-primary-color);
+    display:        flex;
+    flex-direction: column;
+    gap:            5px;
+  }
+}
+
+.reactions {
+  .react {
+    width:          fit-content;
+    padding:        5px 10px;
+    border-radius:  16px;
+    gap:            10px;
+    display:        flex;
+    flex-direction: row;
+    align-items:    center;
+    align-content:  center;
+    background:     var(--background-primary-color);
+
+    svg {
+      left:                0;
+      top:                 0;
+      transition-duration: .3s;
+      fill:                transparent;
+      stroke: white;
+
+      path:nth-child(2) {
+        stroke: white !important;
+      }
+    }
+
+    .like {
+      position:       relative;
+      cursor:         pointer;
+      display:        flex;
+      flex-direction: row;
+      align-items:    center;
+      align-content:  center;
+      gap:            5px;
+    }
+
+    .dislike {
+      transition-duration: .3s;
+      cursor:              pointer;
+      border-left:         1px solid var(--background-secondary-color);
+      padding:             0 0 0 10px;
+    }
+
+    .animated_like {
+      animation: like_animation linear .6s infinite;
+    }
+
+    .chosen {
+      svg {
+        fill: white;
+
+        path:nth-child(2) {
+          stroke: #141414 !important;
+        }
+      }
+    }
+  }
+}
+
+@keyframes like_animation {
+  0% {
+    transform: scale(1);
+    fill:      white;
+  }
+  12.5% { fill: yellow; stroke: yellow; }
+  25% { fill: orange; stroke: orange; }
+  37.5% { fill: red; stroke: red; }
+  50% {
+    transform: scale(1.5);
+    fill:      #c800ff;
+    stroke:    #c800ff;
+  }
+  62.5% { fill: blue; stroke: blue; }
+  75% { fill: #00ffe8; stroke: #00ffe8; }
+  87.5% { fill: #0bec04; stroke: #0bec04; }
+  100% {
+    transform: scale(1);
+    fill:      white;
+    stroke:    white;
+  }
+}

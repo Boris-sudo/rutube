@@ -1,0 +1,55 @@
+.container {
+  width:           100%;
+  height:          100%;
+  display:         flex;
+  flex-direction:  row;
+  justify-content: space-between;
+  align-items:     center;
+  align-content:   center;
+  padding:         0 20px;
+
+  .logo {
+    display:        flex;
+    flex-direction: row;
+    align-items:    center;
+    align-content:  center;
+    gap:            20px;
+
+    p {
+      font-size:   20px;
+      font-weight: bold;
+    }
+  }
+}
+
+.hamburger {
+  --size: var(--hamburger-size);
+  width: var(--size);
+  height: var(--size);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+
+  span {
+    width: var(--hamburger-size);
+    height: 1.5px;
+    background: var(--primary-color);
+  }
+
+  .line {
+    width: var(--hamburger-size);
+    height: 1.5px;
+    background: var(--primary-color);
+    transition-duration: .3s;
+
+    @media screen and (max-width: 600px) {
+      width: var(--close-line-hamburger-size);
+    }
+  }
+}
+
+:host {
+  --hamburger-size:            25px;
+  --close-line-hamburger-size: 10px;
+}

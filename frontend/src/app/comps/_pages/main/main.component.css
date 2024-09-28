@@ -1,0 +1,22 @@
+.container {
+  width: calc(100vw - 230px - 40px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px 15px;
+
+  @media screen and (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 600px) {
+    width: calc(100vw - 40px);
+  }
+
+  @media screen and (max-width: 340px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.video {
+
+}
