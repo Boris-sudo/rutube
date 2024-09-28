@@ -1,0 +1,47 @@
+*, *::before, *::after {
+  box-sizing:                  border-box;
+  margin:                      0;
+  padding:                     0;
+  color:                       inherit;
+}
+
+h1 {
+  margin: 0;
+}
+
+*:not(.scroll-bar)::-webkit-scrollbar {
+  display: none;
+  width:   0;
+}
+
+html, body {
+  width:           100vw;
+  height:      100vh;
+  overflow-x:      hidden;
+  overflow-y:      hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  background: var(--background-primary-color);
+  color: var(--text-priamry-color);
+  font-family: var(--ff-roboto), sans-serif;
+  overflow-y: scroll!important;
+}
+
+input, button, select {
+  outline-offset: 0;
+  outline:        0;
+}
+
+img {
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}

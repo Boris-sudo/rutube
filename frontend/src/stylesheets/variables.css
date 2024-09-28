@@ -1,0 +1,38 @@
+/* VARIABLES */
+
+:root { /* fonts */
+  --ff-bitter:       "Bitter";
+  --ff-roboto:       "Roboto";
+  --ff-josefin-sans: "Josefin Sans";
+}
+
+:root[theme="light"] { /* colors[white-theme] */
+}
+
+:root[theme="dark"] { /* colors[dark-theme] */
+}
+
+:root { /* colors */
+  --primary-color:              #ffffff;
+  --secondary-color:            #000000;
+  --accent-color:               #121d39;
+
+  --button-color:               #49c5b6;
+  --button-secondary-color:     #ff472b;
+  --button-color__hovered:      #405861;
+
+  --text-priamry-color: var(--primary-color);
+  --text-secondary-color:       #6a6e78;
+
+  --background-primary-color:   #222222;
+  --background-secondary-color: #141414;
+}
+
+:root { /* sizes */
+  --header-height: 60px;
+}
+
+:root { /* transition duration times */
+  --slow-transition-time: .6s;
+  --fast-transition-time: .3s;
+}
