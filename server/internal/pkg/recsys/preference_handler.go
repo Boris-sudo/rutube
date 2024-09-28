@@ -15,8 +15,8 @@ import (
 //
 // @Param user_id     body string true "User's unique identifier" example("8195aaf7-0108-4d8c-be8d-fc4255686feb")
 // @Param video_id    body string true "Video's unique identifier" example("6686fc28-e98e-4100-a00e-e180f15e5c75")
-// @Param is_liked    body string false "Indicates if the video is liked" example("true")
-// @Param is_disliked body string false "Indicates if the video is disliked" example("false")
+// @Param is_liked    body string false "Indicates if the video is liked. SHOULD BE BOOLEANS!!! SWAGGER BUGS." example("true")
+// @Param is_disliked body string false "Indicates if the video is disliked. SHOULD BE BOOLEANS!!! SWAGGER BUGS." example("false")
 //
 // @Success 200 {object} map[string]string "Message indicating the save was successful"
 // @Failure 400 {object} map[string]string "Invalid request payload"
@@ -38,6 +38,8 @@ func (handler *RecSys) SaveVideoPreferenceHandler(w http.ResponseWriter, r *http
 		http.Error(w, "Invalid request payload", http.StatusBadRequest)
 		return
 	}
+
+	handler.logger.Debug("Preference save request", zap.Any("request", request))
 
 	if err := SaveVideoPreference(handler.db, request.UserId, request.VideoId, request.IsLiked, request.IsDisliked); err != nil {
 		http.Error(w, "Failed to save video preference", http.StatusInternalServerError)
