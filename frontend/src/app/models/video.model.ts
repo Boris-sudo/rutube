@@ -2,8 +2,8 @@ export interface VideoModel {
   video_id: number;
   title: string;
   description?: string;
-  liked: boolean;
-  disliked: boolean;
+  is_liked: boolean;
+  is_disliked: boolean;
 
   views: number;
   likes: number;

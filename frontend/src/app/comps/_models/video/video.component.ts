@@ -22,24 +22,24 @@ export class VideoComponent {
   ) {}
 
   like() {
-    if (!this.video.liked) {
-      this.video.disliked = false;
-      this.video.liked = true;
-      this.api.react(this.video.video_id, this.video.liked, this.video.disliked).then().catch();
+    if (!this.video.is_liked) {
+      this.video.is_disliked = false;
+      this.video.is_liked = true;
+      this.api.react(this.video.video_id, this.video.is_liked, this.video.is_disliked).then().catch();
     } else {
-      this.video.liked = false;
-      this.api.react(this.video.video_id, this.video.liked, this.video.disliked).then().catch();
+      this.video.is_liked = false;
+      this.api.react(this.video.video_id, this.video.is_liked, this.video.is_disliked).then().catch();
     }
   }
 
   dislike() {
-    if (!this.video.disliked) {
-      this.video.disliked = true;
-      this.video.liked = false;
-      this.api.react(this.video.video_id, this.video.liked, this.video.disliked).then().catch();
+    if (!this.video.is_disliked) {
+      this.video.is_disliked = true;
+      this.video.is_liked = false;
+      this.api.react(this.video.video_id, this.video.is_liked, this.video.is_disliked).then().catch();
     } else {
-      this.video.disliked = false;
-      this.api.react(this.video.video_id, this.video.liked, this.video.disliked).then().catch();
+      this.video.is_disliked = false;
+      this.api.react(this.video.video_id, this.video.is_liked, this.video.is_disliked).then().catch();
     }
   }
 }

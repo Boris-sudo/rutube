@@ -11,8 +11,8 @@ export class MockService {
       video_id: 0,
       title: 'How programmers flex on each other',
       description: 'Brainfuck is a minimal esoteric programming language. It provides a 30K 8-bit array that can be modified with 8 different characters.',
-      liked: false,
-      disliked: false,
+      is_liked: false,
+      is_disliked: false,
       likes: 1203,
       dislikes: 40,
       comments: 130,
@@ -22,8 +22,8 @@ export class MockService {
       video_id: 1,
       title: '10 Math Concepts for Programmers',
       description: 'Learn 10 essential math concepts for software engineering and technical interviews. Understand how programmers use mathematics in fields like AI, game dev, crypto, machine learning, and more.',
-      liked: false,
-      disliked: true,
+      is_liked: false,
+      is_disliked: true,
       likes: 1203,
       dislikes: 40,
       comments: 130,
@@ -33,8 +33,8 @@ export class MockService {
       video_id: 2,
       title: 'Just the Two of Us - Cover',
       description: 'Hey guys it\'s been a while! Here is my cover of Just the Two of Us by Grover Washington Jr. Thank you for all the support, wow almost 500 subs :) some people were asking, my Instagram is @lucellis',
-      liked: false,
-      disliked: false,
+      is_liked: false,
+      is_disliked: false,
       likes: 1203,
       dislikes: 40,
       comments: 130,
@@ -71,12 +71,12 @@ export class MockService {
 
   react(video_id: number, liked: boolean, disliked: boolean) {
     if (liked) {
-      this.videos[video_id].liked = true;
-      this.videos[video_id].disliked = false;
+      this.videos[video_id].is_liked = true;
+      this.videos[video_id].is_disliked = false;
     }
     if (disliked) {
-      this.videos[video_id].liked = false;
-      this.videos[video_id].disliked = true;
+      this.videos[video_id].is_liked = false;
+      this.videos[video_id].is_disliked = true;
     }
     return of('done');
   }

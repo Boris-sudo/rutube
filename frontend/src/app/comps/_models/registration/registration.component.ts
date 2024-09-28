@@ -47,11 +47,11 @@ export class RegistrationComponent implements AfterViewInit {
   Close() {
     this.container.nativeElement.style.display = 'none';
     if (this.api.get_user_id() === null)
-      this.api.register('').then();
+      this.api.register('').then(window.location.reload);
   }
 
   Login() {
-    this.api.login(this.login_data.email, this.login_data.password).then();
+    this.api.login(this.login_data.email, this.login_data.password).then(window.location.reload);
   }
 
   Register() {
@@ -60,7 +60,9 @@ export class RegistrationComponent implements AfterViewInit {
       this.register_data.password, this.register_data.name,
       this.register_data.surname, this.register_data.region,
       this.register_data.city
-    ).then(this.Close);
+    ).then(() => {
+      window.location.reload();
+    });
   }
 
   LoginButtonDisabled() {

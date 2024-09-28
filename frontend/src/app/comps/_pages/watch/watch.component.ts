@@ -44,7 +44,7 @@ export class WatchComponent implements OnInit {
   }
 
   likeVideo() {
-    if (!this.video.liked) {
+    if (!this.video.is_liked) {
       this.like_container.nativeElement.style.paddingLeft = '25px'
       this.like_icon.nativeElement.style.position = 'absolute';
       this.like_icon.nativeElement.classList.add('animated_like')
@@ -53,30 +53,30 @@ export class WatchComponent implements OnInit {
         this.like_icon.nativeElement.classList.remove('animated_like')
       }, 600);
 
-      if (this.video.disliked) this.video.dislikes--;
-      this.video.disliked = false;
-      this.video.liked = true;
+      if (this.video.is_disliked) this.video.dislikes--;
+      this.video.is_disliked = false;
+      this.video.is_liked = true;
       this.video.likes++;
-      this.api.react(this.video.video_id, this.video.liked, this.video.disliked).then().catch();
+      this.api.react(this.video.video_id, this.video.is_liked, this.video.is_disliked).then().catch();
     } else {
-      if (this.video.liked)
+      if (this.video.is_liked)
         this.video.likes--;
-      this.video.liked = false;
-      this.api.react(this.video.video_id, this.video.liked, this.video.disliked).then().catch();
+      this.video.is_liked = false;
+      this.api.react(this.video.video_id, this.video.is_liked, this.video.is_disliked).then().catch();
     }
   }
 
   dislikeVideo() {
-    if (!this.video.disliked) {
-      if (this.video.liked) this.video.likes--;
-      this.video.disliked = true;
-      this.video.liked = false;
+    if (!this.video.is_disliked) {
+      if (this.video.is_liked) this.video.likes--;
+      this.video.is_disliked = true;
+      this.video.is_liked = false;
       this.video.dislikes++;
-      this.api.react(this.video.video_id, this.video.liked, this.video.disliked).then().catch();
+      this.api.react(this.video.video_id, this.video.is_liked, this.video.is_disliked).then().catch();
     } else {
-      if (this.video.disliked) this.video.dislikes--;
-      this.video.disliked = false;
-      this.api.react(this.video.video_id, this.video.liked, this.video.disliked).then().catch();
+      if (this.video.is_disliked) this.video.dislikes--;
+      this.video.is_disliked = false;
+      this.api.react(this.video.video_id, this.video.is_liked, this.video.is_disliked).then().catch();
     }
   }
 }
