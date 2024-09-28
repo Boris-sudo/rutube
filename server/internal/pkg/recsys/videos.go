@@ -50,7 +50,7 @@ func (handler *RecSys) GetVideosByUserID(w http.ResponseWriter, r *http.Request)
 
 	handler.logger.Debug("Sending user to analytics", zap.Any("User", user))
 	// Create a request to the external API
-	apiUrl := "http://localhost:5000/api/random_videos"
+	apiUrl := "http://localhost:5000/api/predicted_videos"
 	req, err := http.NewRequest("POST", apiUrl, bytes.NewBuffer(userJson))
 	if err != nil {
 		handler.logger.Debug("Error creating request", zap.Error(err))
