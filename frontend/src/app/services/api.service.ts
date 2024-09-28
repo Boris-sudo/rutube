@@ -13,7 +13,7 @@ export class ApiService {
   private readonly user_id_key: string = 'session';
 
   private request(url: string): string {
-    return `${ this.base_url }/${ url }/`;
+    return `${ this.base_url }/${ url }`;
   }
 
   constructor(
@@ -33,7 +33,7 @@ export class ApiService {
     let result!: VideoModel;
 
     const resp: any = await firstValueFrom(onErrorResumeNext(
-      this.http.get(this.request('x')),
+      this.http.get(this.request('')),
       this.mock.get_video_by_id(id)
     ));
 
