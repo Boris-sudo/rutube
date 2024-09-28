@@ -52,8 +52,8 @@ export class ApiService {
       this.http.post(this.request('recsys/preferences/save'), {
         user_id: String(user_id),
         video_id: String(video_id),
-        liked: String(liked),
-        disliked: String(disliked)
+        liked: liked,
+        disliked: disliked
       })
     );
 
