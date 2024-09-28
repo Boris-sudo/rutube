@@ -1,5 +1,5 @@
 import {
-  AfterViewInit,
+  AfterViewInit, booleanAttribute,
   Component,
   ComponentFactoryResolver, ComponentRef,
   OnInit,
@@ -89,6 +89,7 @@ export class ShortsComponent implements OnInit, AfterViewInit {
         this.scrollUp();
     });
     this.addSwipeMobileController();
+    this.addLaptopSwipeController();
   }
 
   addSwipeMobileController() {
@@ -136,6 +137,32 @@ export class ShortsComponent implements OnInit, AfterViewInit {
     window.addEventListener('touchstart', handleTouchStart);
     window.addEventListener('touchmove', handleTouchMove);
     window.addEventListener('touchend', handleTouchEnd);
+  }
+
+  addLaptopSwipeController() {
+    let clientY: number = -1;
+    let done = false;
+
+    window.addEventListener('wheel', (event) => {
+      if (clientY !== event.clientY) {
+        console.log('новое касание')
+        clientY = event.clientY;
+        done = false;
+      }
+      if (!done && Math.abs(event.deltaY) > 70 && event.deltaY > 0) {
+        this.scrollDown();
+        done = true;
+      } else if (!done && Math.abs(event.deltaY) > 70) {
+        this.scrollUp();
+        done = true;
+      }
+    });
+
+    window.addEventListener("touchstart", ()=>{console.log('start')}, false);
+    window.addEventListener("touchend", ()=>{console.log('start')}, false);
+    window.addEventListener("touchcancel", ()=>{console.log('start')}, false);
+    window.addEventListener("touchmove", ()=>{console.log('start')}, false);
+
   }
 
   reload() {
