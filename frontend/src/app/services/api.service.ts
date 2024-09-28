@@ -33,7 +33,7 @@ export class ApiService {
     let result!: VideoModel;
 
     const resp: any = await firstValueFrom(onErrorResumeNext(
-      this.http.get(this.request('')),
+      this.http.get(this.request('x')),
       this.mock.get_video_by_id(id)
     ));
 
