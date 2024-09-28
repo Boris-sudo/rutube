@@ -111,7 +111,7 @@ export class ShortsComponent implements OnInit, AfterViewInit {
         // @ts-ignore
         current.style.transform = 'ScaleY(1) translateX(-50%)';
         // @ts-ignore
-        next.style.top = 'calc(90% + 30px)';
+        next.style.top = '';
       }, 300);
       setTimeout(this.reload, 600)
       return;
