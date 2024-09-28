@@ -26,6 +26,6 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.api.get_videos(12).then(resp => this.addVideos(resp));
+    this.api.get_videos(10).then(resp => this.addVideos(resp));
   }
 }
