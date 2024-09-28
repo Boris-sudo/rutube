@@ -13,8 +13,4 @@ export class MainVideoCoverComponent {
 
   constructor() {
   }
-
-  getSrc() {
-    return this.video.main_src;
-  }
 }

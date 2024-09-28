@@ -1,12 +1,16 @@
 <div class="container">
-  <img [src]="getSrc()" alt="">
+  <div style="position: relative">
+    <img src="main/1.webp" alt="">
+    <div [style.background]="video.gradient" class="background"></div>
+  </div>
 
   <div class="info">
-    <p>{{ video.title }}</p>
+    <p class="video-name">{{ video.title }}</p>
     <div class="stats">
       <p>Likes: {{ video.likes }}</p>
       <span class="dot"></span>
       <p>Comments: {{ video.comments }}</p>
     </div>
+    <p class="little-p">Views: {{video.views}}</p>
   </div>
 </div>

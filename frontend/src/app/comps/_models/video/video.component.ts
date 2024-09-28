@@ -23,8 +23,8 @@ export class VideoComponent {
   }
 
   getSrc() {
-    console.log(this.video.shorts_src);
-    return this.video.shorts_src;
+    console.log(this.video.gradient);
+    return this.video.gradient;
   }
 
   like() {

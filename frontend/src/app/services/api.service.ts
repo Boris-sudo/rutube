@@ -42,25 +42,26 @@ export class ApiService {
       this.mock.get_videos(count)
     ));
 
-    function shuffle(array: number[]) {
-      let currentIndex = array.length;
-      while (currentIndex != 0) {
-        let randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-        [array[currentIndex], array[randomIndex]] = [
-          array[randomIndex], array[currentIndex]];
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
       }
+      return color;
     }
-    let arr = [];
-    for (let i = 1; i <= 20; i++) arr.push(i);
-    shuffle(arr);
+    function setRandomGradient() {
+      const color1 = getRandomColor();
+      const color2 = getRandomColor();
+      const angle = Math.floor(Math.random() * 360);
+      return `linear-gradient(${angle}deg, ${color1}, ${color2})`;
+    }
 
     let index = 0;
     for (const video of resp) {
       let res_video: any = {};
       for (const key in video) res_video[key] = video[key];
-      res_video.main_src = `main/${arr[index]}.webp`;
-      res_video.shorts_src = `shorts/${arr[index]}.avif`;
+      res_video.gradient = setRandomGradient();
       index++;
       result.push(res_video);
     }
