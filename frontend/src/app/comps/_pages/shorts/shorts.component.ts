@@ -141,28 +141,26 @@ export class ShortsComponent implements OnInit, AfterViewInit {
 
   addLaptopSwipeController() {
     let clientY: number = -1;
+    let deltaY: number = 0;
+    let last_timestamp: number = -1e9;
     let done = false;
 
     window.addEventListener('wheel', (event) => {
-      if (clientY !== event.clientY) {
-        console.log('новое касание')
-        clientY = event.clientY;
+      if (Math.abs(last_timestamp - event.timeStamp) >= 1500) {
+        last_timestamp = event.timeStamp;
+        deltaY = event.deltaY;
+        clientY = event.layerY;
         done = false;
       }
-      if (!done && Math.abs(event.deltaY) > 70 && event.deltaY > 0) {
+      deltaY += event.deltaY;
+      if (!done && Math.abs(deltaY) > 70 && deltaY > 0) {
         this.scrollDown();
         done = true;
-      } else if (!done && Math.abs(event.deltaY) > 70) {
+      } else if (!done && Math.abs(deltaY) > 70) {
         this.scrollUp();
         done = true;
       }
     });
-
-    window.addEventListener("touchstart", ()=>{console.log('start')}, false);
-    window.addEventListener("touchend", ()=>{console.log('start')}, false);
-    window.addEventListener("touchcancel", ()=>{console.log('start')}, false);
-    window.addEventListener("touchmove", ()=>{console.log('start')}, false);
-
   }
 
   reload() {
