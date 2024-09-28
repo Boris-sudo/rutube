@@ -12,7 +12,7 @@ df = df[(df['v_is_hidden'] == False) & (df['v_is_deleted'] == False)]
 @app.route('/api/random_videos', methods=['POST'])
 def get_random_videos():
     data = request.get_json()
-    print(data)
+#     print(data)
 
     # Select 10 random videos
     random_videos = df.sample(n=10, random_state=random.randint(0, 5))  # Set random_state for reproducibility
@@ -25,6 +25,7 @@ def get_random_videos():
             'description': row['description'],
             'title': row['title'],
             'views': row['v_year_views'],
+            'comments': row['v_total_comments'],
             'likes': row['v_likes'],
             'dislikes': row['v_dislikes']
         }

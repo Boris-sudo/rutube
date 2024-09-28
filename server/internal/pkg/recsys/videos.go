@@ -82,6 +82,28 @@ func (handler *RecSys) GetVideosByUserID(w http.ResponseWriter, r *http.Request)
 		http.Error(w, "Failed to decode API response", http.StatusInternalServerError)
 		return
 	}
+
+	// Fetch user's video preferences from the database
+	var preferences []models.UserVideoPreference
+	if err := handler.db.Where("user_id = ?", user.Id).Find(&preferences).Error; err != nil {
+		handler.logger.Debug("Error fetching video preferences", zap.Error(err))
+		http.Error(w, "Failed to fetch user preferences", http.StatusInternalServerError)
+		return
+	}
+
+	// Map preferences
+	prefMap := make(map[string]models.UserVideoPreference)
+	for _, pref := range preferences {
+		prefMap[pref.VideoId] = pref
+	}
+
+	for i, video := range recommendedVideos {
+		if pref, found := prefMap[video.Id]; found {
+			recommendedVideos[i].IsLiked = pref.IsLiked
+			recommendedVideos[i].IsDisliked = pref.IsDisliked
+		}
+	}
+
 	handler.logger.Debug("Received videos", zap.Any("recommended_videos", recommendedVideos))
 
 	// Send the recommended videos back
