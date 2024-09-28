@@ -37,9 +37,7 @@ export class ShortsComponent implements OnInit, AfterViewInit {
   }
 
   addVideos() {
-    console.log('adding videos')
     this.api.get_videos().then((resp) => {
-      console.log('added videos')
       for (const video of resp)
         this.videos.push(video);
       if (this.videos.length > 100) {
@@ -89,7 +87,55 @@ export class ShortsComponent implements OnInit, AfterViewInit {
         this.scrollDown();
       if (e.key === 'ArrowUp')
         this.scrollUp();
-    })
+    });
+    this.addSwipeMobileController();
+  }
+
+  addSwipeMobileController() {
+    console.log('adding events with touch')
+    let startY = 0;
+    let minY = 60;
+    let deltaY = 0;
+    let isMultiTouch = false;
+
+    const handleTouchStart = (event: any) => {
+      startY = event.touches[0].clientY;
+      deltaY = 0;
+    }
+
+    const handleTouchMove = (event: any) => {
+      const currentY = event.touches[0].clientY;
+      deltaY = currentY - startY;
+
+      const current = document.getElementsByClassName('current').item(0)!;
+      const next = document.getElementsByClassName('next').item(0)!;
+      const translateY = `${(deltaY / window.innerHeight) * window.innerHeight * 0.9}px`;
+      // @ts-ignore
+      current.style.transform = `translateX(-50%) translateY(${translateY})`;
+      // @ts-ignore
+      next.style.transform = `translateX(-50%) translateY(${translateY})`;
+    }
+
+    const handleTouchEnd = (event: any) => {
+      const current = document.getElementsByClassName('current').item(0)!;
+      const next = document.getElementsByClassName('next').item(0)!;
+      // @ts-ignore
+      current.style.transform = ``;
+      // @ts-ignore
+      next.style.transform = ``;
+
+      if (Math.abs(deltaY) < minY) return;
+      if (deltaY > 0) {
+        this.scrollUp();
+      } else {
+        this.scrollDown();
+      }
+
+    }
+
+    window.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('touchend', handleTouchEnd);
   }
 
   reload() {
@@ -104,12 +150,12 @@ export class ShortsComponent implements OnInit, AfterViewInit {
 
     if (this.current_index === 0 || prev === null) {
       // @ts-ignore
-      current.style.transform = 'ScaleY(1.1) translateX(-50%)';
+      current.style.transform = 'scaleY(1.1) translateX(-50%)';
       // @ts-ignore
       next.style.top = 'calc(90% * 1.1 + 30px)';
       setTimeout(() => {
         // @ts-ignore
-        current.style.transform = 'ScaleY(1) translateX(-50%)';
+        current.style.transform = 'scaleY(1) translateX(-50%)';
         // @ts-ignore
         next.style.top = '';
       }, 300);

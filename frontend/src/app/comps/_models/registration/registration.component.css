@@ -1,0 +1,116 @@
+.container {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,10%);
+  backdrop-filter: blur(2px);
+  display: none;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  z-index: 10001;
+}
+
+.content {
+  width: 404px;
+  max-width: 90vw;
+  padding: 24px;
+  border-radius: 16px;
+  position: relative;
+  background: var(--background-primary-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+
+  .cross {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    fill: white;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+  }
+
+  .form {
+    width: 100%;
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .input-group {
+      width: 100%;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+
+      label {
+        display: block;
+        color: var(--text-secondary-color);
+        margin-bottom: 4px;
+      }
+
+      input {
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid var(--text-secondary-color);
+        outline: 0;
+        background-color: var(--background-secondary-color);
+        padding: 0.75rem 1rem;
+        color: rgba(243, 244, 246, 1);
+
+        &:focus {
+          border-color: var(--button-color);
+        }
+      }
+    }
+
+    .btn {
+      margin-top: 1rem;
+      display: block;
+      width: 100%;
+      background-color: var(--button-color);
+      padding: 0.75rem;
+      text-align: center;
+      color: var(--background-primary-color);
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition-duration: .3s;
+      cursor: pointer;
+
+      &:disabled {
+        background: #405861FF!important;
+      }
+
+      &:hover {
+        background: #33776e;
+      }
+    }
+  }
+
+  .change-text {
+    margin-top: 1.75rem;
+    text-align: center;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: var(--text-secondary-color);
+
+    span {
+      margin-left: 0.25rem;
+      cursor: pointer;
+      color: var(--text-priamry-color)
+    }
+  }
+}

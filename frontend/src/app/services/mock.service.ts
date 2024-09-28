@@ -80,4 +80,8 @@ export class MockService {
     }
     return of('done');
   }
+
+  register() {
+    return of(JSON.stringify({'uuid': '1'}));
+  }
 }

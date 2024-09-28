@@ -1,0 +1,71 @@
+<div class="container" #container>
+  <div class="content">
+    <div class="cross">
+      <svg (click)="Close()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M6.56 6.56a.62.62 0 0 1 .88 0l10 10a.622.622 0 1 1-.88.88l-10-10a.62.62 0 0 1 0-.88" clip-rule="evenodd"></path><path fill="currentColor" fill-rule="evenodd" d="M17.44 6.56a.62.62 0 0 1 0 .88l-10 10a.622.622 0 0 1-.88-.88l10-10a.62.62 0 0 1 .88 0" clip-rule="evenodd"></path></svg>
+    </div>
+
+    @if (register) {
+      <p class="title">Регистрация</p>
+
+      <div class="form">
+        <div class="input-group">
+          <label for="register-login">Имя пользователя</label>
+          <input [(ngModel)]="register_data.login" name="usename" type="text" id="register-login" placeholder="">
+        </div>
+
+        <div class="input-group">
+          <label for="register-email">Почта</label>
+          <input [(ngModel)]="register_data.email" name="email" type="email" id="register-email" placeholder="">
+        </div>
+
+        <div class="input-group">
+          <label for="register-password">Пароль</label>
+          <input [(ngModel)]="register_data.password" name="password" type="password" id="register-password" placeholder="">
+        </div>
+
+        <div class="input-group">
+          <label for="register-login">Имя</label>
+          <input [(ngModel)]="register_data.name" name="name" type="text" id="register-name" placeholder="">
+        </div>
+
+        <div class="input-group">
+          <label for="register-surname">Фамилия</label>
+          <input [(ngModel)]="register_data.surname" name="surname" type="text" id="register-surname" placeholder="">
+        </div>
+
+        <div class="input-group">
+          <label for="register-region">Регион проживания</label>
+          <input [(ngModel)]="register_data.region" name="region" type="text" id="register-region" placeholder="">
+        </div>
+
+        <div class="input-group">
+          <label for="register-city">Город проживания</label>
+          <input [(ngModel)]="register_data.city" name="city" type="text" id="register-city" placeholder="">
+        </div>
+
+        <button (click)="Register()" [disabled]="RegisterButtonDisabled()" class="btn">Зарегистрироваться</button>
+      </div>
+
+      <p class="change-text">Уже есть аккаунт?<span (click)="register = false">Войти</span>
+    }
+    @else {
+      <p class="title">Вход</p>
+
+      <div class="form">
+        <div class="input-group">
+          <label for="login-email">Почта</label>
+          <input [(ngModel)]="login_data.email" name="email" type="email" id="login-email" placeholder="">
+        </div>
+
+        <div class="input-group">
+          <label for="login-password">Пароль</label>
+          <input [(ngModel)]="login_data.password" name="password" type="password" id="login-password" placeholder="">
+        </div>
+
+        <button (click)="Login()" [disabled]="LoginButtonDisabled()" class="btn">Войти</button>
+      </div>
+
+      <p class="change-text">Нет аккаунта?<span (click)="register = true">Зарегистрироваться</span>
+    }
+  </div>
+</div>
