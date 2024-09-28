@@ -13,7 +13,7 @@ func SaveVideoPreference(db *gorm.DB, userId string, videoId string, isLiked boo
 		// If it exists, update the preference
 		existingPreference.IsLiked = isLiked
 		existingPreference.IsDisliked = isDisliked
-		return db.Save(&existingPreference).Error
+		return db.Where("user_id = ? AND video_id = ?", userId, videoId).Save(&existingPreference).Error
 	}
 
 	// If it does not exist, create a new preference
