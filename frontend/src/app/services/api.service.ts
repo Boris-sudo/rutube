@@ -61,15 +61,14 @@ export class ApiService {
   async react(video_id: number, liked: boolean, disliked: boolean) {
     const user_id = this.get_user_id();
 
-    const resp: any = await firstValueFrom(onErrorResumeNext(
+    const resp: any = await firstValueFrom(
       this.http.post(this.request('recsys/preferences/save'), {
         user_id: String(user_id),
         video_id: String(video_id),
         liked: String(liked),
         disliked: String(disliked)
-      }),
-      this.mock.react(video_id, liked, disliked)
-    ));
+      })
+    );
 
     return resp;
   }

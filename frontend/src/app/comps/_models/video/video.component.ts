@@ -23,10 +23,13 @@ export class VideoComponent {
 
   like() {
     if (!this.video.is_liked) {
+      if (this.video.is_disliked) this.video.dislikes--;
       this.video.is_disliked = false;
       this.video.is_liked = true;
+      this.video.likes++;
       this.api.react(this.video.video_id, this.video.is_liked, this.video.is_disliked).then().catch();
     } else {
+      if (this.video.is_liked) this.video.likes--;
       this.video.is_liked = false;
       this.api.react(this.video.video_id, this.video.is_liked, this.video.is_disliked).then().catch();
     }
@@ -34,10 +37,13 @@ export class VideoComponent {
 
   dislike() {
     if (!this.video.is_disliked) {
+      if (this.video.is_liked) this.video.likes--;
       this.video.is_disliked = true;
       this.video.is_liked = false;
+      this.video.dislikes++;
       this.api.react(this.video.video_id, this.video.is_liked, this.video.is_disliked).then().catch();
     } else {
+      if (this.video.is_disliked) this.video.dislikes--;
       this.video.is_disliked = false;
       this.api.react(this.video.video_id, this.video.is_liked, this.video.is_disliked).then().catch();
     }
