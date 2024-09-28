@@ -736,6 +736,77 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/recsys/user": {
+            "post": {
+                "description": "It does EXACTLY what it says.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Video History"
+                ],
+                "summary": "retrieves a user with history by their ID",
+                "responses": {}
+            }
+        },
+        "/recsys/videos": {
+            "post": {
+                "description": "This API sends a user object to ML backend providing recommendations based on the user's history",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "recommendations"
+                ],
+                "summary": "Get recommended videos for a user",
+                "parameters": [
+                    {
+                        "description": "User's ID",
+                        "name": "user_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of recommended videos",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Video"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request payload",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -762,6 +833,19 @@ const docTemplate = `{
                 },
                 "uuid": {
                     "type": "string"
+                },
+                "video_history": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.UserVideoHistory"
+                    }
+                },
+                "video_preferences": {
+                    "description": "Stats",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.UserVideoPreference"
+                    }
                 }
             }
         },
@@ -802,6 +886,29 @@ const docTemplate = `{
                 },
                 "videoId": {
                     "type": "string"
+                }
+            }
+        },
+        "models.Video": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "dislikes": {
+                    "type": "integer"
+                },
+                "likes": {
+                    "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "video_id": {
+                    "type": "string"
+                },
+                "views": {
+                    "type": "integer"
                 }
             }
         }

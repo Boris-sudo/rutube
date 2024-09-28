@@ -8,11 +8,6 @@ import (
 	"net/http"
 )
 
-type RecSys struct {
-	logger *log.Logger
-	db     *gorm.DB
-}
-
 // ClearVideoHistoryHandler godoc
 // @Summary Clears user's video history
 // @Description It does EXACTLY what it says.

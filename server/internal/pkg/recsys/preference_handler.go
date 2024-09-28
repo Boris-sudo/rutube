@@ -34,6 +34,7 @@ func (handler *RecSys) SaveVideoPreferenceHandler(w http.ResponseWriter, r *http
 
 	var request SaveVideoPreferenceRequest
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
+		handler.logger.Debug("Error decoding request", zap.Error(err))
 		http.Error(w, "Invalid request payload", http.StatusBadRequest)
 		return
 	}

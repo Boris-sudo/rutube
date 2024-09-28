@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import pandas as pd
 import json
+import random
 
 app = Flask(__name__)
 
@@ -14,7 +15,7 @@ def get_random_videos():
     print(data)
 
     # Select 10 random videos
-    random_videos = df.sample(n=10, random_state=1)  # Set random_state for reproducibility
+    random_videos = df.sample(n=10, random_state=random.randint(0, 5))  # Set random_state for reproducibility
 
     # Create a list of dictionaries for the desired output
     video_list = []
