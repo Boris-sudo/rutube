@@ -203,6 +203,7 @@ export class ShortsComponent implements OnInit, AfterViewInit {
 
     const componentFactory = this.resolver.resolveComponentFactory(VideoComponent);
     const componentRef: ComponentRef<VideoComponent> = this.viewContainerRef.createComponent(componentFactory);
+    this.renderer.setStyle(componentRef.location.nativeElement, 'height', '100%');
     this.renderer.appendChild(div, componentRef.location.nativeElement);
 
     componentRef.instance.video = this.videos[this.current_index - 1];
@@ -231,6 +232,7 @@ export class ShortsComponent implements OnInit, AfterViewInit {
 
     const componentFactory = this.resolver.resolveComponentFactory(VideoComponent);
     const componentRef: ComponentRef<VideoComponent> = this.viewContainerRef.createComponent(componentFactory);
+    this.renderer.setStyle(componentRef.location.nativeElement, 'height', '100%');
     this.renderer.appendChild(div, componentRef.location.nativeElement);
 
     componentRef.instance.video = this.videos[this.current_index + 2];

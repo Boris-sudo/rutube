@@ -1,4 +1,7 @@
 export interface VideoModel {
+  shorts_src?: string;
+  main_src?: string;
+
   video_id: number;
   title: string;
   description?: string;

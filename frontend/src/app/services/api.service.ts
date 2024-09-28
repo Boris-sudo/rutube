@@ -25,6 +25,10 @@ export class ApiService {
     return localStorage.getItem(this.user_id_key);
   }
 
+  randomIntFromInterval(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
   save_user_id(user_id: string) {
     localStorage.setItem(this.user_id_key, user_id);
   }
@@ -39,7 +43,10 @@ export class ApiService {
     ));
 
     for (const video of resp) {
-      result.push(video);
+      let res_video: VideoModel = video;
+      res_video.main_src = `main/${this.randomIntFromInterval(1,1)}.webp`;
+      res_video.shorts_src = `shorts/${this.randomIntFromInterval(1,20)}.avif`;
+      result.push(res_video);
     }
 
     return result;
