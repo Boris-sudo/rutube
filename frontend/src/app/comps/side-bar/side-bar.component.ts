@@ -34,7 +34,9 @@ export class SideBarComponent implements AfterViewInit {
 
   static Show() {
     const container: HTMLElement = document.getElementById('side-menu-container')!;
+    const policy = document.getElementById('side-menu-policy')!;
     container.style.maxWidth = 'var(--container-width)';
+    policy.style.display = 'block';
 
     if (window.innerWidth > 600) {
       for (let i = 0; i < 1000; i++) {
@@ -56,7 +58,9 @@ export class SideBarComponent implements AfterViewInit {
 
   static Hide() {
     const container: HTMLElement = document.getElementById('side-menu-container')!;
+    const policy = document.getElementById('side-menu-policy')!;
     container.style.maxWidth = 'var(--container-mini-width)';
+    policy.style.display = 'none';
 
     if (window.innerWidth > 600) {
       for (let i = 0; i < 1000; i++) {
