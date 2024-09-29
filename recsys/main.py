@@ -25,8 +25,8 @@ def get_predicted_videos():
     top_video_ids = video_df.sample(n=10, random_state=random.randint(0, 100000000))
 
     video_list = []
-    for video_id in top_video_ids:
-        video_info = video_df.iloc[video_id]
+    for _, video_info in top_video_ids.iterrows():
+#         video_info = video_df.iloc[video_id]
         video_data = {
             'video_id': video_info['video_id'],
             'description': video_info['description'],
