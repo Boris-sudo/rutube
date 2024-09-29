@@ -19,10 +19,10 @@ video_df = pd.read_parquet(video_file_path, engine='pyarrow')
 @app.route('/api/predicted_videos', methods=['POST'])
 def get_predicted_videos():
     data = request.get_json()
-#     print(data)
+    print(data)
 
-#     top_video_ids = service.get_videos_ai(data, 10)
-    top_video_ids = video_df.sample(n=10, random_state=random.randint(0, 100000000))
+    top_video_ids = service.get_videos_ai(data, 10)
+#     top_video_ids = video_df.sample(n=10, random_state=random.randint(0, 100000000))
 
     video_list = []
     for _, video_info in top_video_ids.iterrows():
