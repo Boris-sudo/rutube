@@ -3,7 +3,7 @@ import pandas as pd
 import torch
 import torch.nn as nn
 import numpy as np
-# import service
+import service
 import random
 
 # Инициализация Flask приложения
@@ -13,7 +13,7 @@ app = Flask(__name__)
 
 video_file_path = './data/video.parquet'
 video_df = pd.read_parquet(video_file_path, engine='pyarrow')
-# get_video = service.get_videos_ai
+get_video = service.get_videos_ai
 
 
 @app.route('/api/predicted_videos', methods=['POST'])
