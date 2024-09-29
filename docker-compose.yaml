@@ -1,0 +1,33 @@
+version: "1.0"
+services:
+  postgresdb:
+    image: postgres:14.7-alpine
+    #    restart: always
+    container_name: cold-start-postgresdb
+    environment:
+      - POSTGRES_USER=cold-start-api
+      - POSTGRES_PASSWORD=IRJVmesoirmvhOIUSEHRVMOUWYVwHRvnOMAIwrhawrvhtgj
+      - POSTGRES_DB=cold-start-api
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./server/storage/postgresql:/var/lib/postgresql/data
+
+  cold-start-frontend:
+    network_mode: "host"
+    build: frontend
+
+  cold-start-daemon:
+    network_mode: "host"
+    build: server
+    #    restart: always
+    tty: true
+    ports:
+      - "8080:8080"
+    environment:
+      - APP_ENV=prod
+    volumes:
+      - ./server/storage/:/app/storage/
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - postgresdb

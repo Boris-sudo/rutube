@@ -1,0 +1,28 @@
+app:
+  env: "prod"
+
+http:
+  base: "127.0.0.1"
+  port: "8080"
+
+security:
+  jwt:
+    secret: "#5v8Y#J%V7GJ#AWVaslkjfhvg4w7tyvGasudvhfjioYUAGVWE"
+  auth:
+    salt_size: 24
+
+database:
+  postgres:
+    user: "cold-start-api"
+    pass: "IRJVmesoirmvhOIUSEHRVMOUWYVwHRvnOMAIwrhawrvhtgj"
+    port: "5432"
+    db: "cold-start-api"
+
+log:
+  log_level: debug
+  encoding: console # json or console
+  log_file: "./storage/logs/production.log"
+  max_backups: 30
+  max_age: 7
+  max_size: 1024
+  compress: true
