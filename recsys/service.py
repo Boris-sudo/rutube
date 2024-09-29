@@ -78,27 +78,13 @@ def get_videos_ai(user, num_recommendations):
         interaction_list.append({"video_id": video_id, "interaction_score": score})
 
     interaction_list = pd.DataFrame(interaction_list)
-    print(interaction_list)
-    user_mapping = {user: idx for idx, user in enumerate(df['user_id'].unique())}
-    video_mapping = {video: idx for idx, video in enumerate(df['video_id'].unique())}
-    interaction_list['user_idx'] = interaction_list['user_id'].map(user_mapping)
-    interaction_list['video_idx'] = interaction_list['video_id'].map(video_mapping)
-
-    # Преобразование данных
-    user_ids = df['user_idx'].values
-    video_ids = df['video_idx'].values
-
-    user_id = len(user_ids)
-
-    user_tensor = torch.tensor([user_id] * len(interaction_list), dtype=torch.long).to(device)
-    video_tensor = torch.tensor(interaction_list['video_idx'].values, dtype=torch.long).to(device)
 
     with torch.no_grad():
-        predictions = model(user_tensor, video_tensor).numpy()
+        predictions = model.predict(interaction_list).numpy()
 
     interaction_list['predicted_interaction'] = predictions
 
     top_videos = interaction_list.sort_values(by='predicted_interaction', ascending=False)['video_id'].values
 
-    print(f"Топ рекомендованных видео для нового пользователя {user_id}: {top_videos}")
+    print(f"Топ рекомендованных видео для нового пользователя: {top_videos}")
     return top_videos

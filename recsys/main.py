@@ -3,7 +3,7 @@ import pandas as pd
 import torch
 import torch.nn as nn
 import numpy as np
-import service
+# import service
 import random
 
 # Инициализация Flask приложения
@@ -13,15 +13,16 @@ app = Flask(__name__)
 
 video_file_path = './data/video.parquet'
 video_df = pd.read_parquet(video_file_path, engine='pyarrow')
-get_video = service.get_videos_ai
+# get_video = service.get_videos_ai
 
 
 @app.route('/api/predicted_videos', methods=['POST'])
 def get_predicted_videos():
     data = request.get_json()
-    print(data)
-    top_video_ids = get_video(data, num_recommendations=40)
-    top_video_ids = random.sample(list(top_video_ids), 10)
+#     print(data)
+
+#     top_video_ids = service.get_videos_ai(data, 10)
+    top_video_ids = video_df.sample(n=10, random_state=random.randint(0, 100000000))
 
     video_list = []
     for video_id in top_video_ids:
